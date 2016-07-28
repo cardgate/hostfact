@@ -82,8 +82,8 @@ $src = '../Klanten/betalen/cardgate/';
 $dst = 'cardgate/betalen/cardgate/';
 $is_dir = true;
 array_push( $data, data_element( $src, $dst, $is_dir ) );
-$src = '../Klanten/images/cardgate.jpg';
-$dst = 'cardgate/images/cardgate.jpg';
+$src = '../Klanten/betalen/images/cardgate.jpg';
+$dst = 'cardgate/betalen/images/cardgate.jpg';
 $is_dir = false;
 array_push( $data, data_element( $src, $dst, $is_dir ) );
 

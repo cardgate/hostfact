@@ -2,7 +2,7 @@
 
 class cardgate extends Payment_Provider_Base {
 
-    protected $version = '1.0.3';
+    protected $version = '1.0.4';
     protected $_PaymentMethods = '';
     private $_TEST = false;
     private $_url = '';
@@ -45,8 +45,8 @@ class cardgate extends Payment_Provider_Base {
             }
 
             $cont .= '<tr>'
-                    . '<td><label style="width:640px;" for="'.strtolower( $method['name']).'">'
-                    . '<input type="radio" ' . $checked . ' value="' . strtolower( $method['name'] ) . '" id="'.strtolower( $method['name']).'" name="cgp_option" onChange="showBanks(' . $is_true . ')">'
+                    . '<td><label style="width:640px;" for="' . strtolower( $method['name'] ) . '">'
+                    . '<input type="radio" ' . $checked . ' value="' . strtolower( $method['name'] ) . '" id="' . strtolower( $method['name'] ) . '" name="cgp_option" onChange="showBanks(' . $is_true . ')">'
                     . '<img src="' . $method['image'] . '" hspace="5">'
                     . '&nbsp;' . $method['description'];
             if ( strtolower( $method['name'] ) == 'ideal' ) {
@@ -78,19 +78,19 @@ class cardgate extends Payment_Provider_Base {
         }
         $cont .='</table>';
         /*
-        $cont .= '<script>'
-                . 'var el = document.getElementsByName("PaymentMethod");'
-                . 'if (el.length==1) {'
-                . ' el[0].checked=true;'
-                . '}'
-                . '</script>';
+          $cont .= '<script>'
+          . 'var el = document.getElementsByName("PaymentMethod");'
+          . 'if (el.length==1) {'
+          . ' el[0].checked=true;'
+          . '}'
+          . '</script>';
          * 
          */
         return $cont;
     }
 
     private function getPaymentMethods() {
-  
+
         if ( strpos( $this->conf['MerchantID'], '/' ) > 0 ) {
             $params = explode( '/', $this->conf['MerchantID'] );
             $sSiteID = $params[0];
@@ -100,8 +100,8 @@ class cardgate extends Payment_Provider_Base {
 
         $sHashKey = $this->conf['Password'];
         $version = str_replace( '.', '', $this->version );
-        $url = $this->_url . "/getpm/cgsp$sSiteID/" . md5( $sSiteID . $sHashKey );
-
+        $url = $this->_url . "getpm/cgsp$sSiteID/" . md5( $sSiteID . $sHashKey );
+       
         $methods = unserialize( file_get_contents( $url ) );
         return $methods;
     }
@@ -214,13 +214,13 @@ class cardgate extends Payment_Provider_Base {
             if ( strpos( $this->conf['MerchantID'], '/' ) > 0 ) {
                 $params = explode( '/', $this->conf['MerchantID'] );
                 $siteID = $params[0];
-                $mode = strtolower( $params[1] );
             } else {
                 $siteID = $this->conf['MerchantID'];
-                $mode = 'live';
             }
             $data['siteid'] = $siteID;
         }
+
+        $mode = $this->getMode();
 
         if ( $mode == 'test' ) {
             $data['test'] = 1;
@@ -313,14 +313,14 @@ class cardgate extends Payment_Provider_Base {
                         $_POST['ref'] .
                         $_POST['status'] .
                         $this->conf['Password'];
-                
+
                 if ( md5( $hashString ) != $_POST['hash'] ) {
                     exit( 'hash did not match' );
                 }
 
-                 
+
                 print $_POST['transaction_id'] . '.' . $_POST['status'];
-                
+
                 if ( !$this->Paid ) {
                     if ( $_POST['status'] == 200 ) {
                         $this->paymentProcessed( $transactionID );
@@ -331,7 +331,7 @@ class cardgate extends Payment_Provider_Base {
                 exit();
             }
         } else {
-          
+
             // Process return urls
             // For consumer (in this case the status is already changed by server-to-server notification script)
             if ( $this->getType( $transactionID ) && $this->Paid > 0 ) {
@@ -373,19 +373,28 @@ class cardgate extends Payment_Provider_Base {
         $settings['Advanced']['Title'] = "CardGate";
         $settings['Advanced']['Image'] = "cardgate.jpg";
         $settings['Advanced']['Extra'] = "Kies uw betaalmethode a.u.b.:";
-        
+
         $settings['Hint'] = "SiteId/Mode voorbeeld: 0001/test of 0001/live<br>"
                 . "Vul de Codeersleutel in, die u in uw Cardgate merchant back-office heeft aangemaakt.<br>"
                 . "De betaalmethoden die voor u ingesteld zijn door Cardgate, zullen automatisch worden aangemaakt.<br>";
         return $settings;
     }
-    public function getGatewayUrl ()
-	{
-		if ( ! empty( $_SERVER['CGP_GATEWAY_URL'] ) ) {
-			return $_SERVER['CGP_GATEWAY_URL'];
-		} else {
-			return 'https://gateway.cardgateplus.com';
-		}
-	}
+
+    public function getGatewayUrl() {
+        if ( !empty( $_SERVER['CGP_GATEWAY_URL'] ) ) {
+            return $_SERVER['CGP_GATEWAY_URL'];
+        } else {
+            return "https://gateway.cardgateplus.com/";
+        }
+    }
+
+    function getMode() {
+        if ( strpos( $this->conf['MerchantID'], '/' ) > 0 ) {
+            $mode = strtolower( $params[1] );
+        } else {
+            $mode = 'live';
+        }
+        return $mode;
+    }
 
 }
