@@ -101,7 +101,7 @@ class cardgate extends Payment_Provider_Base {
         $sHashKey = $this->conf['Password'];
         $version = str_replace( '.', '', $this->version );
         $url = $this->_url . "getpm/cgsp$sSiteID/" . md5( $sSiteID . $sHashKey );
-       
+
         $methods = unserialize( file_get_contents( $url ) );
         return $methods;
     }
@@ -390,6 +390,7 @@ class cardgate extends Payment_Provider_Base {
 
     function getMode() {
         if ( strpos( $this->conf['MerchantID'], '/' ) > 0 ) {
+            $params = explode( '/', $this->conf['MerchantID'] );
             $mode = strtolower( $params[1] );
         } else {
             $mode = 'live';
