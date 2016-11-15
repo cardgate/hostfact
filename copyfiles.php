@@ -77,13 +77,20 @@ function data_element( $src, $dst, $is_dir = false ) {
 
 $data = array();
 
-
 $src = '../Klanten/betalen/cardgate/';
-$dst = 'cardgate/betalen/cardgate/';
+$dst = 'cardgate/Klanten/betalen/cardgate/';
 $is_dir = true;
 array_push( $data, data_element( $src, $dst, $is_dir ) );
 $src = '../Klanten/betalen/images/cardgate.jpg';
-$dst = 'cardgate/betalen/images/cardgate.jpg';
+$dst = 'cardgate/Klanten/betalen/images/cardgate.jpg';
+$is_dir = false;
+array_push( $data, data_element( $src, $dst, $is_dir ) );
+$src = '../klantenpaneel/betalen/cardgate/';
+$dst = 'cardgate/klantenpaneel/betalen/cardgate/';
+$is_dir = true;
+array_push( $data, data_element( $src, $dst, $is_dir ) );
+$src = '../klantenpaneel/betalen/images/cardgate.jpg';
+$dst = 'cardgate/klantenpaneel/betalen/images/cardgate.jpg';
 $is_dir = false;
 array_push( $data, data_element( $src, $dst, $is_dir ) );
 

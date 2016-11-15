@@ -2,7 +2,7 @@
 
 class cardgate extends Payment_Provider_Base {
 
-    protected $version = '1.0.4';
+    protected $version = '1.0.5';
     protected $_PaymentMethods = '';
     private $_TEST = false;
     private $_url = '';
@@ -22,7 +22,7 @@ class cardgate extends Payment_Provider_Base {
     }
 
     public function payOptions() {
-
+ 
         $this->_PaymentMethods = $this->getPaymentMethods();
 
         $cont = '<table>';
@@ -90,7 +90,7 @@ class cardgate extends Payment_Provider_Base {
     }
 
     private function getPaymentMethods() {
-
+        
         if ( strpos( $this->conf['MerchantID'], '/' ) > 0 ) {
             $params = explode( '/', $this->conf['MerchantID'] );
             $sSiteID = $params[0];
