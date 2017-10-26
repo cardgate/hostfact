@@ -2,7 +2,7 @@
 
 class cardgate extends Payment_Provider_Base {
 
-    protected $version = '1.0.5';
+    protected $version = '1.0.6';
     protected $_PaymentMethods = '';
     private $_TEST = false;
     private $_url = '';
@@ -106,34 +106,27 @@ class cardgate extends Payment_Provider_Base {
     }
 
     public function getBankOptions() {
-
-        $url = 'https://gateway.cardgateplus.com/cache/idealDirectoryRabobank.dat';
-
-        if ( !ini_get( 'allow_url_fopen' ) || !function_exists( 'file_get_contents' ) ) {
-            $result = false;
-        } else {
-            $result = file_get_contents( $url );
-        }
-
-        $aBanks = array();
-
-        if ( $result ) {
-            $aBanks = unserialize( $result );
-            $aBanks[0] = '-Maak uw keuze a.u.b.-';
-        }
-        if ( count( $aBanks ) < 1 ) {
-            $aBanks = array( '0031' => 'ABN Amro',
-                '0091' => 'Friesland Bank',
-                '0721' => 'ING Bank',
-                '0021' => 'Rabobank',
-                '0751' => 'SNS Bank',
-                '0761' => 'ASN Bank',
-                '0771' => 'SNS Regio Bank',
-                '0511' => 'Triodos Bank',
-                '0161' => 'Van Landschot Bank'
-            );
-        }
-        return $aBanks;
+    	
+    	$iPos = stripos($this->conf['MerchantID'],'test');
+    	if ($iPos === false){
+    		$sUrl = "https://secure.curopayments.net/cache/idealDirectoryCUROPayments.dat";
+    	} else {
+    		$sUrl = "https://secure-staging.curopayments.net/cache/idealDirectoryCUROPayments.dat";
+    	}
+    	
+    	if ( !ini_get( 'allow_url_fopen' ) || !function_exists( 'file_get_contents' ) ) {
+    		$result = false;
+    	} else {
+    		$result = file_get_contents( $sUrl );
+    	}
+    	
+    	$aBanks = array();
+    	
+    	if ( $result ) {
+    		$aBanks = unserialize( $result );
+    		$aBanks[0] = '-Maak uw keuze a.u.b.-';
+    	}
+    	return $aBanks;
     }
 
     public function choosePaymentMethod() {
@@ -380,11 +373,12 @@ class cardgate extends Payment_Provider_Base {
     }
 
     public function getGatewayUrl() {
-        if ( !empty( $_SERVER['CGP_GATEWAY_URL'] ) ) {
-            return $_SERVER['CGP_GATEWAY_URL'];
-        } else {
-            return "https://gateway.cardgateplus.com/";
-        }
+    	$iPos = stripos($this->conf['MerchantID'],'test');
+    	if ($iPos === false){
+    		return "https://secure.curopayments.net/gateway/cardgate/";
+    	} else {
+    		return "https://secure-staging.curopayments.net/gateway/cardgate/";
+    	}
     }
 
     function getMode() {
