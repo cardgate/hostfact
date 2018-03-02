@@ -24,7 +24,7 @@ Ga a.u.b. naar [My Cardgate](https://my.cardgate.com/) en kopieer de  Site ID an
 
 3. Upload de map **klantenbeheer/betalen** naar de map **/htdocs/klantenbeheer/** van je webshop.
   
-## Configuration
+## Configuratie
 
 1. Login op het **admin** gedeelte van je webshop.
 
