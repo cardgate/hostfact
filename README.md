@@ -2,10 +2,6 @@
 
 # CardGate module voor WeFact hosting versie **3.3.0+**
 
-[![Total Downloads](https://img.shields.io/packagist/dt/cardgate/wefact.svg)](https://packagist.org/packages/cardgate/wefact)
-[![Latest Version](https://img.shields.io/packagist/v/cardgate/wefact.svg)](https://github.com/cardgate/wefact/releases)
-[![Build Status](https://travis-ci.org/cardgate/wefact.svg?branch=master)](https://travis-ci.org/cardgate/wefact)
-
 ## Support
 
 Deze plug-in is geschikt voor WeFact hosting versie **3.3.0** of hoger
