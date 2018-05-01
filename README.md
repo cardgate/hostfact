@@ -10,11 +10,12 @@ Deze plug-in is geschikt voor WeFact hosting versie **3.3.0** of hoger
 
 Voor het gebruik van deze module zijn CardGate inloggegevens noodzakelijk.
 
-Ga a.u.b. naar [My Cardgate](https://my.cardgate.com/) en kopieer de  Site ID and Codeersleutel, of vraag deze gegevens aan uw accountmanager.
+Bezoek hiervoor [Mijn CardGate](https://my.cardgate.com/) en haal daar je gegevens op,  
+of neem contact op met je accountmanager.
 
 ## Installatie
 
-1. Download en unzip het **cardgate.zip** bestand op je bureaublad.
+1. Download en unzip de meest recente [source code](https://github.com/cardgate/wefact/releases/) op je bureaublad.
 
 2. Upload de map **Klanten/betalen** naar de map **/htdocs/Klanten/** van je webshop.
 
@@ -32,14 +33,14 @@ Ga a.u.b. naar [My Cardgate](https://my.cardgate.com/) en kopieer de  Site ID an
 
 5. Vul de details in bij **Algemeen** en **Instellingen voor de betaalmethode**.
 
-6. Vul de **Site ID** en de **Hash Key (Codeersleutel)** in, deze kun je vinden bij **Sites** op [My Cardgate](https://my.cardgate.com/).
+6. Vul de **site ID** en de **hash key** in, deze kun je vinden bij **Sites** op [Mijn CardGate](https://my.cardgate.com/).
 
 7. De betaalmethoden die voor je **geactiveerd** zijn zullen automatisch in het betaalscherm van WeFact verschijnen.  
-   (Indien de instellingen correct zijn ingevuld)
+   (Indien de instellingen correct zijn ingevuld.)
 
 8. Klik op **Betaalmethode toevoegen** om de instellingen op te slaan.
 
-9. Ga naar [My Cardgate](https://my.cardgate.com/), kies **Sites** en selecteer de juiste site.
+9. Ga naar [Mijn CardGate](https://my.cardgate.com/), kies **Sites** en selecteer de juiste site.
 
 10. Vul bij **Technische koppeling** de **Callback URL** in, bijvoorbeeld:  
     **http://mijnwebshop.com/klantenbeheer/betalen/cardgate/notify.php**  
