@@ -359,7 +359,7 @@ class cardgate extends Payment_Provider_Base {
         $settings['MerchantID']['Title'] = "Site ID/Mode";
         $settings['MerchantID']['Value'] = "";
 
-        $settings['Password']['Title'] = "Codeer sleutel";
+        $settings['Password']['Title'] = "Hash key";
         $settings['Password']['Value'] = "";
 
         $settings['Advanced']['Title'] = "CardGate";
