@@ -17,8 +17,6 @@ of neem contact op met je accountmanager.
 
 1. Download en unzip de meest recente [source code](https://github.com/cardgate/hostfact/releases/) op je bureaublad.
 
-
-
 3. Upload de map **klantenbeheer/betalen** naar de map **/htdocs/klantenbeheer/** van je webshop.
   
 ## Configuratie
