@@ -2,7 +2,7 @@
 
 class cardgate extends Payment_Provider_Base {
 
-    protected $version = '1.0.1';
+    protected $version = '1.0.7';
     protected $_PaymentMethods = '';
     private $_TEST = false;
     private $_url = '';
@@ -195,7 +195,7 @@ class cardgate extends Payment_Provider_Base {
         $data['return_url_failed'] = IDEAL_EMAIL . 'cardgate/notify.php?ref=' . $orderID;
         $data['shop_name'] = 'HostFact';
         $data['shop_version'] = '5';
-        $data['plugin_name'] = 'Cardgate_WeFact';
+        $data['plugin_name'] = 'cardgate_hostfact';
         $data['plugin_version'] = $this->version;
 
         if ( $this->conf['Password'] == '' ) {
@@ -271,6 +271,10 @@ class cardgate extends Payment_Provider_Base {
                     <input type="hidden" name="city" value="<?php echo $data['city']; ?>" />
                     <input type="hidden" name="country_code" value="<?php echo $data['country_code']; ?>" />
                     <input type="hidden" name="hash" value="<?php echo $data['hash']; ?>" />
+                    <input type="hidden" name="shop_name" value="<?php echo $data['shop_name']; ?>" />
+                    <input type="hidden" name="shop_version" value="<?php echo $data['shop_version']; ?>" />
+                    <input type="hidden" name="plugin_name" value="<?php echo $data['plugin_name']; ?>" />
+                    <input type="hidden" name="plugin-version" value="<?php echo $data['plugin_version']; ?>" />
                 </form>
                 <script type="text/javascript">
                     document.form.submit();
