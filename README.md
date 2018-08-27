@@ -1,10 +1,10 @@
 ![CardGate](https://cdn.curopayments.net/thumb/200/logos/cardgate.png)
 
-# CardGate module voor WeFact hosting versie **3.3.0+**
+# CardGate module voor HostFact hosting versie **5.0.0+**
 
 ## Support
 
-Deze plug-in is geschikt voor WeFact hosting versie **3.3.0** of hoger
+Deze plug-in is geschikt voor HostFact versie **5.0.0** of hoger
 
 ## Voorbereiding
 
@@ -15,9 +15,7 @@ of neem contact op met je accountmanager.
 
 ## Installatie
 
-1. Download en unzip de meest recente [source code](https://github.com/cardgate/wefact/releases/) op je bureaublad.
-
-2. Upload de map **Klanten/betalen** naar de map **/htdocs/Klanten/** van je webshop.
+1. Download en unzip de meest recente [source code](https://github.com/cardgate/hostfact/releases/) op je bureaublad.
 
 3. Upload de map **klantenbeheer/betalen** naar de map **/htdocs/klantenbeheer/** van je webshop.
   
@@ -43,7 +41,7 @@ of neem contact op met je accountmanager.
 9. Ga naar [Mijn CardGate](https://my.cardgate.com/), kies **Sites** en selecteer de juiste site.
 
 10. Vul bij **Technische koppeling** de **Callback URL** in, bijvoorbeeld:  
-    **http://mijnwebshop.com/klantenbeheer/betalen/cardgate/notify.php**  
+    **http://mijnwebshop.com/klantenpaneel/betalen/cardgate/notify.php**  
     (Vervang **http://mijnwebshop.com** met de URL van je webshop)  
 
 11. Zorg ervoor dat je na het testen de **Mode** omschakelt van **Test Mode** naar **Live mode** en sla het op (**Save**).

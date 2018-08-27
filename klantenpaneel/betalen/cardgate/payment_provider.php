@@ -2,7 +2,7 @@
 
 class cardgate extends Payment_Provider_Base {
 
-    protected $version = '1.0.6';
+    protected $version = '1.0.7';
     protected $_PaymentMethods = '';
     private $_TEST = false;
     private $_url = '';
@@ -22,7 +22,7 @@ class cardgate extends Payment_Provider_Base {
     }
 
     public function payOptions() {
-
+ 
         $this->_PaymentMethods = $this->getPaymentMethods();
 
         $cont = '<table>';
@@ -90,6 +90,7 @@ class cardgate extends Payment_Provider_Base {
     }
 
     private function getPaymentMethods() {
+        
         if ( strpos( $this->conf['MerchantID'], '/' ) > 0 ) {
             $params = explode( '/', $this->conf['MerchantID'] );
             $sSiteID = $params[0];
@@ -113,20 +114,20 @@ class cardgate extends Payment_Provider_Base {
     	} else {
     		$sUrl = "https://secure-staging.curopayments.net/cache/idealDirectoryCUROPayments.dat";
     	}
-    	
-    	if ( !ini_get( 'allow_url_fopen' ) || !function_exists( 'file_get_contents' ) ) {
-    		$result = false;
-    	} else {
-    		$result = file_get_contents( $sUrl );
-    	}
-    	
-    	$aBanks = array();
-    	
-    	if ( $result ) {
-    		$aBanks = unserialize( $result );
-    		$aBanks[0] = '-Maak uw keuze a.u.b.-';
-    	}
-    	return $aBanks;
+
+        if ( !ini_get( 'allow_url_fopen' ) || !function_exists( 'file_get_contents' ) ) {
+            $result = false;
+        } else {
+            $result = file_get_contents( $sUrl );
+        }
+
+        $aBanks = array();
+
+        if ( $result ) {
+            $aBanks = unserialize( $result );
+            $aBanks[0] = '-Maak uw keuze a.u.b.-';
+        }
+        return $aBanks;
     }
 
     public function choosePaymentMethod() {
@@ -140,13 +141,14 @@ class cardgate extends Payment_Provider_Base {
     public function validateChosenPaymentMethod() {
 // If we dont need to ask for payment method upfront, return true (always valid)
 //return true;
-// Or check the chosen payment methods and store in session		
+// Or check the chosen payment methods and store in session	
+
         if ( isset( $_POST['cgp_suboption'] ) ) {
             $_SESSION['cgp_suboption'] = $_POST['cgp_suboption'];
         }
         if ( isset( $_POST['cgp_option'] ) && $_POST['cgp_option'] ) {
             $_SESSION['cgp_option'] = htmlspecialchars( $_POST['cgp_option'] );
-            if ( $_SESSION['cgp_option'] == 'ideal' && ($_SESSION['cgp_suboption'] == 0 || $_SESSION['cgp_suboption'] == 1) ) {
+            if ( $_SESSION['cgp_option'] == 'ideal' && ($_SESSION['cgp_suboption']) == '0' ) {
                 $this->Error = 'Kies uw bank a.u.b.';
                 return false;
             } else {
@@ -191,9 +193,9 @@ class cardgate extends Payment_Provider_Base {
         $data['language'] = 'nl';
         $data['return_url'] = IDEAL_EMAIL . 'cardgate/notify.php?ref=' . $orderID;
         $data['return_url_failed'] = IDEAL_EMAIL . 'cardgate/notify.php?ref=' . $orderID;
-        $data['shop_name'] = 'WeFact';
-        $data['shop_version'] = '1.0';
-        $data['plugin_name'] = 'Cardgate_WeFact';
+        $data['shop_name'] = 'HostFact';
+        $data['shop_version'] = '5';
+        $data['plugin_name'] = 'cardgate_hostfact';
         $data['plugin_version'] = $this->version;
 
         if ( $this->conf['Password'] == '' ) {
@@ -269,6 +271,10 @@ class cardgate extends Payment_Provider_Base {
                     <input type="hidden" name="city" value="<?php echo $data['city']; ?>" />
                     <input type="hidden" name="country_code" value="<?php echo $data['country_code']; ?>" />
                     <input type="hidden" name="hash" value="<?php echo $data['hash']; ?>" />
+                    <input type="hidden" name="shop_name" value="<?php echo $data['shop_name']; ?>" />
+                    <input type="hidden" name="shop_version" value="<?php echo $data['shop_version']; ?>" />
+                    <input type="hidden" name="plugin_name" value="<?php echo $data['plugin_name']; ?>" />
+                    <input type="hidden" name="plugin-version" value="<?php echo $data['plugin_version']; ?>" />
                 </form>
                 <script type="text/javascript">
                     document.form.submit();
@@ -375,7 +381,7 @@ class cardgate extends Payment_Provider_Base {
     public function getGatewayUrl() {
     	$iPos = stripos($this->conf['MerchantID'],'test');
     	if ($iPos === false){
-    		return "https://secure.curopayments.net/gateway/cardgate/";
+            return "https://secure.curopayments.net/gateway/cardgate/";
     	} else {
     		return "https://secure-staging.curopayments.net/gateway/cardgate/";
     	}
