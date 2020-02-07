@@ -1,0 +1,15 @@
+{
+  "name": "cardgate/hostfact",
+  "type": "library",
+  "description": "CardGate payment processing module for Hostfact",
+  "keywords": [
+    "hostfact",
+    "cardgate",
+    "payment"
+  ],
+  "homepage": "https://www.cardgate.com",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": { "Cardgate\\hostfact\\" : "" }
+  }
+}
