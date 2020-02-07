@@ -4,8 +4,9 @@ chdir( '../' );
 require_once "config.php";
 // Load payment provider class
 require_once "cardgate/payment_provider.php";
+
 $tmp_payment_provider = new cardgate();
- 
+
 if ( isset( $_POST['status'] ) ) {
     $tmp_payment_provider->isNotificationScript = true;
 }

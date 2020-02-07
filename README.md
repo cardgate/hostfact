@@ -2,6 +2,8 @@
 
 # CardGate module voor HostFact hosting versie **5.0.0+**
 
+[![Build Status](https://travis-ci.org/cardgate/hostfact.svg?branch=master)](https://travis-ci.org/cardgate/hostfact)
+
 ## Support
 
 Deze plug-in is geschikt voor HostFact versie **5.0.0** of hoger
