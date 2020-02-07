@@ -77,15 +77,6 @@ class cardgate extends Payment_Provider_Base {
             $i++;
         }
         $cont .='</table>';
-        /*
-          $cont .= '<script>'
-          . 'var el = document.getElementsByName("PaymentMethod");'
-          . 'if (el.length==1) {'
-          . ' el[0].checked=true;'
-          . '}'
-          . '</script>';
-         * 
-         */
         return $cont;
     }
 
