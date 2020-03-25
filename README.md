@@ -19,7 +19,7 @@ of neem contact op met je accountmanager.
 
 1. Download en unzip het meest recente [cardgate.zip](https://github.com/cardgate/hostfact/releases/) bestand op je bureaublad.
 
-2. Upload de **klantenbeheer** map naar de **root** map van je webshop.
+2. Upload de **klantenpaneel** map naar de **root** map van je webshop.
   
 ## Configuratie
 
