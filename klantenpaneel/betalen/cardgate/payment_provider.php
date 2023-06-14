@@ -2,7 +2,7 @@
 
 class cardgate extends Payment_Provider_Base {
 
-    protected $version = '1.0.7';
+    protected $version = '1.0.8';
     protected $_PaymentMethods = '';
     private $_TEST = false;
     private $_url = '';
@@ -170,6 +170,7 @@ class cardgate extends Payment_Provider_Base {
         }
 
         $customer = $this->getCustomerData();
+        $versionData = $this->getVersionData();
 
         $data['ref'] = $orderID;
         $data['first_name'] = $customer->Initials;
@@ -185,7 +186,7 @@ class cardgate extends Payment_Provider_Base {
         $data['return_url'] = IDEAL_EMAIL . 'cardgate/notify.php?ref=' . $orderID;
         $data['return_url_failed'] = IDEAL_EMAIL . 'cardgate/notify.php?ref=' . $orderID;
         $data['shop_name'] = 'HostFact';
-        $data['shop_version'] = '5';
+        $data['shop_version'] = $versionData->Value;
         $data['plugin_name'] = 'cardgate_hostfact';
         $data['plugin_version'] = $this->version;
 
@@ -388,4 +389,10 @@ class cardgate extends Payment_Provider_Base {
         return $mode;
     }
 
+    private function getVersionData(){
+        $pdo_statement = $this->db->prepare("SELECT * FROM `HostFact_Settings` WHERE `Variable`='SOFTWARE_VERSION' ");
+        $pdo_statement->execute();
+        $result = $pdo_statement->fetch();
+        return $result;
+    }
 }
